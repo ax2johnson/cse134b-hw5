@@ -1,0 +1,109 @@
+******************************************************************************
+
+DISCLAIMER:
+
+Although our application may not be fully polished as stated by the requirements,
+it is not without good reason. We (CalTrackers) originally had a group of 5 people,
+and in the initial stage of the assignment we distributed the work out. Three of
+us worked on our parts in the beginning, doing what we can while the other two
+put the rest of our team on a communication black out (didn't hear anything from
+them for a few days). It turned out that the two of them dropped the class
+without letting the rest of us know, meaning we had 40% of the work left in addition
+to all the work we still had left, to do in just the last week. This lack of time
+for such a huge amount of work ultimately resulted in lack of polish in some aspects
+of the application, such as interactive polish and a real time solution.
+
+
+Now, onto the actual writeup
+
+******************************************************************************
+
+
+
+
+The Purpose of this assignment is to use Javascript to turn a series of HTML
+and CSS template mockups to a polished web application. Our responsibilities
+were to:
+
+a) Implement CRUD functions (Create Read Update Delete)
+
+b) Have UI focused Javascript
+
+c) Have a notification solution for the end user from the application
+
+For:
+
+a) we implemented all of the CRUD functions using Firebase, a JavaScript
+framework that handles the majority of our backend functionality including
+authorization and the database. in the CRUD.js file is a series of javascript
+functions called by the HTML that handles all the logic for creating new habits,
+listing them, editing them, and deleting them in our database securely.
+
+b) we implemented a couple UI focused Javascript functions, in order to give our app more fluity and give
+   the user some sort of feedback of what has been performed. 
+   		1) to avoid null values in our database, we implemented a system that when the user is creating a habit
+   		   all the fields must have a value. When user forgets set a field we let them know by providing a red label
+   		   indicating what the user forgot to complete. The label is right below the save button, this way the user can
+   		   see right away what information is missing.
+
+   		2) One of our main focused on the app is the ability of the user to track progress on a habit. Having this in mind 
+   		   we decided to create some javascript animation when the user indicates that he has succesfully performed a habit.
+   		   When the user logs a habit, we have a progress bar that automatically increases and indicates the progress the user
+   		   has accomplished for that habit.  
+
+c) we attempted to implement a notification system through Roost to remind the user to record and complete his/her habits. The
+user would receive push reminders whenever a habit was scheduled for that day at a time that the user would specify. Unfortunately,
+these notifications proved fairly difficult to implement with vanilla Javascript and without a server to push the notifications
+to the user's screen. We attempted to use the Roost free trial server to send the notifications but without a PHP compatible
+server, we were unable to send the request in the required format. It should also be noted that Roost is not completely compatible
+with Chrome or FireFox and there aren't many other services that would allow for web notifications when the browser is not open.
+
+
+Working Functionalities:
+	* Able to validate a log-in or prompt user to sign-up if email does not exist on data base
+	* User has the ability to create habits
+		- Can name habit
+		- Choose an icon from preset image
+		- Choose Weekly Frequency
+		- Choose how many times a day user wishes to perform the habit
+	* User is able to edit a habit, change any of the following (title, icon and/or frequencies).
+	* Successfully able to log if user performed a habit during that day and let user see the progress with a 
+	  bar animation which indicates the percentage completed for that day.
+	* User is able to delete a habit.
+
+
+
+Missing functionalities:
+	* User is not able to upload a personal icon
+	* Could not make notifications work properly
+
+
+Browser Problems:
+	* Close to turn-in we realize that our add function is not working on Chrome, and its only working on Safari. 
+		The error we get is the following:
+
+			Uncaught SecurityError: Failed to execute 'toDataURL' on 'HTMLCanvasElement': Tainted canvases may not be exported.
+
+		after some reasearch we realize that it has something to do with out preset icons being saved in local folders and not database. Although we have an idea how to solve this unfortunately we ran out of time.
+
+
+
+GROUP MEMBERS LEFT AND TASKS:
+
+Elioth Almada: 
+	1) User able to add a method and store in databse 
+	2) Store image to database as base64
+	3) Give user the ability to select more than 3 for daily frequency aswell as editing the daily frequency
+	4) Allow user to log when a habit is completed and track the progress (progress bar).
+
+Austin Li:
+	1) Set up the back end
+    2) Login and sign up authorization
+    3) List and delete in CRU
+
+Anthony Johnson:
+	1) Edit habit function
+	2) Date display intended for notifications and list display
+	3) Beginning notification logic (Roost)
+		
+
