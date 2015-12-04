@@ -1,6 +1,9 @@
-******************************************************************************
+e******************************************************************************
 
 DISCLAIMER:
+
+
+HW4:
 
 Although our application may not be fully polished as stated by the requirements,
 it is not without good reason. We (CalTrackers) originally had a group of 5 people,
@@ -13,8 +16,33 @@ to all the work we still had left, to do in just the last week. This lack of tim
 for such a huge amount of work ultimately resulted in lack of polish in some aspects
 of the application, such as interactive polish and a real time solution.
 
+HW5:
+
+For homework 5, we had yet another member leave our team, leaving our group size
+to a measly 2 people having to implement an entire project meant for a full sized 
+group. Due to this lack of manpower + lack of time due to last minute people dropping,
+we were unable to fulfill all the requirements for the project for a polished way. We
+did what we could to have the base web application as polished as possible and focused
+most of our efforts on that. We have basic error and usage monitoring in the application 
+as required. Where we're lacking is having a polished POC for Android/IOS and packaging
+efforts for Chrome OS/Windows/etc. since those were projects on their own that would've 
+taken too much time given our limited resources and manpower.
 
 Now, onto the actual writeup
+
+******************************************************************************
+
+
+
+
+
+
+
+
+
+******************************************************************************
+
+Actual Web Appplication
 
 ******************************************************************************
 
@@ -90,11 +118,6 @@ Browser Problems:
 
 GROUP MEMBERS LEFT AND TASKS:
 
-Elioth Almada: 
-	1) User able to add a method and store in databse 
-	2) Store image to database as base64
-	3) Give user the ability to select more than 3 for daily frequency aswell as editing the daily frequency
-	4) Allow user to log when a habit is completed and track the progress (progress bar).
 
 Austin Li:
 	1) Set up the back end
@@ -105,5 +128,74 @@ Anthony Johnson:
 	1) Edit habit function
 	2) Date display intended for notifications and list display
 	3) Beginning notification logic (Roost)
+
+Elioth Almada (Left during HW5) : 
+	1) User able to add a method and store in databse 
+	2) Store image to database as base64
+	3) Give user the ability to select more than 3 for daily frequency aswell as editing the daily frequency
+	4) Allow user to log when a habit is completed and track the progress (progress bar).
+
+
+
+
+
+
+
+
+
+******************************************************************************
+
+Monitoring and Analytics
+
+******************************************************************************
+
+
+
+For Error monitoring, we used Rollbar as our service. Every time the application
+throws an error or logs one in the console, we also send the name and type of
+error up to Rollbar.
+
+For Usage monitoring, we used Mixpanel. Whenever one of our CRUD functions is
+executed, we send a log to our Mixpanel database of exactly what happenned
+and which command was executed. Because of our lack of manpower and time, we
+were unable to incorporate analytics. We were planning to do something like 
+recording the number of times each CRUD command was executed in comparison with
+one another to analyze user tendencies in how they deal with their habits.
+
+
+
+
+
+
+
+
+
+******************************************************************************
+
+Packaging efforts and Proof of Concepts
+
+******************************************************************************
+
 		
+Due to a lack of manpower and time, we don't have a fully polished/functioning
+proof of concept for Android. Our attempt to execute this was to use Phonegap to
+wrap our application. We created the apk using the Phonegap building tool passing
+in our web application. We tested it on an android device and there were a few bugs, 
+including:
+
+	- CSS not showing correctly
+	- Buttons not functioning 100%
+	- Occassionally crashes
+
+One other option we considered was to display the application on Android using
+WebView for android in an application. However, to create this new project and 
+port ours into it, as well as enabling all the options and flags that would've made
+it fully functionally would have taken too much time.
+
+For other packaging efforts, we were going to try to package it as a chrome
+application/extension, but after research, found that it would've taken too much 
+time, which most likely would've involved creating a new chrome extension/app 
+project and porting over all the stuff manually.
+
+
 
