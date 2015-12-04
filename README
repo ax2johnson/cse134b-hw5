@@ -36,6 +36,31 @@ Now, onto the actual writeup
 
 
 
+******************************************************************************
+
+Initial Setup
+
+******************************************************************************
+
+Our web application is being hosted on a raspberry pi through one of our home
+networks. We already configured the port forwarding and the website can be accessed
+publicly, however, we were not able to register for a free domain name in time 
+so the IP address of the raspberry pi server must be used to access the application:
+
+http://108.253.177.158
+
+
+If you wish to run the application locally, you must first download node.js and 
+navigate to the '134b-hw5' folder. From there, you will need to run the following
+command:
+
+node bin/www
+
+This will start the node.js server on your localhost and you can access the app at
+the following network location"
+
+http://localhost
+
 
 
 
@@ -79,14 +104,14 @@ b) we implemented a couple UI focused Javascript functions, in order to give our
    		   When the user logs a habit, we have a progress bar that automatically increases and indicates the progress the user
    		   has accomplished for that habit.  
 
-c) we attempted to implement a notification system through Roost to remind the user to record and complete his/her habits. The
+c) we originally attempted to implement a notification system through Roost to remind the user to record and complete his/her habits. The
 user would receive push reminders whenever a habit was scheduled for that day at a time that the user would specify. Unfortunately,
 these notifications proved fairly difficult to implement with vanilla Javascript and without a server to push the notifications
 to the user's screen. We attempted to use the Roost free trial server to send the notifications but without a PHP compatible
 server, we were unable to send the request in the required format. It should also be noted that Roost is not completely compatible
 with Chrome or FireFox and there aren't many other services that would allow for web notifications when the browser is not open.
 
-c) we completely refactored our original notification solution because Roost did not provide a complete SDK for our needs and 
+d) we completely refactored our original notification solution because Roost did not provide a complete SDK for our needs and 
 was only available as a free trial version that broadcasted notifications to everyone. we instead constructed a node.js server and
 ran it locally during development. we eventually ported the server to a raspberry pie which would be constantly running over one 
 of our home networks. this allowed us to host the project publically on the internet, granting our server the ability to send 
@@ -95,7 +120,9 @@ sent an initial request to our server. if so, the server would emit a signal thr
 notification to the user to remind them to complete their active habits for today. the active habits were characterized as habits
 specificied for that day of the week in addition to not yet meeting the daily goal. the actual notifications that are sent are from
 the Notifications API compatible with Firefox, Chrome, Safari, and Opera but not Internet Explorer. the user would have to grant
-access to these notifications via a pop up that our application initally prompts. once 
+access to these notifications via a pop up that our application initally prompts. once permission has been granted, the notifications
+will show up on the desktop as long as the application is open in the browser. it is not realistic to allow desktop notifications if
+the web app is closed since that would require installing the files locally on the user's computer.
 
 
 Working Functionalities:
@@ -109,12 +136,13 @@ Working Functionalities:
 	* Successfully able to log if user performed a habit during that day and let user see the progress with a 
 	  bar animation which indicates the percentage completed for that day.
 	* User is able to delete a habit.
+	* The habits are account specific as well. if another user logs in, he will only see the habits he created.
+	* Desktop notifications work as long as the web app is open in the browser
 
 
 
 Missing functionalities:
 	* User is not able to upload a personal icon
-	* Could not make notifications work properly
 
 
 Browser Problems:
@@ -133,12 +161,14 @@ GROUP MEMBERS LEFT AND TASKS:
 Austin Li:
 	1) Set up the back end
     2) Login and sign up authorization
-    3) List and delete in CRU
+    3) List and delete in CRUD
 
 Anthony Johnson:
 	1) Edit habit function
 	2) Date display intended for notifications and list display
-	3) Beginning notification logic (Roost
+	3) Desktop notification feature
+	4) Account specific habits and data
+	5) Node.js server set up and deployment
 
 Elioth Almada (Left during HW5) : 
 	1) User able to add a method and store in databse 
