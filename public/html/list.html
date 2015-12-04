@@ -22,6 +22,7 @@
         }
     </script>
     <!-- end Rollbar -->
+    <script src="jquery-1.11.3.min.js"></script>
     <script src="CRUD.js"></script>
     <script src="firebase.js"></script>
     <script src="socket.io.js"></script>
@@ -106,8 +107,9 @@
         }
 
         function reminder(day) {
+            var userID = window.localStorage.getItem("userID");
             var myFirebaseRef = new Firebase("https://torrid-fire-6209.firebaseio.com");
-            var habitsRef = myFirebaseRef.child("habits");
+            var habitsRef = myFirebaseRef.child("users").child(userID).child("habits");
             
             habitsRef.once("value", function(snapshot) {
                 snapshot.forEach(function(childSnapshot){
@@ -116,7 +118,7 @@
                     var days = childSnapshot.val().weeklyfrequency;
                     
                     if (days[day] && progress < goal){
-                        notifyMe(childSnapshot);
+                        setTimeout(notifyMe(childSnapshot), 30000);
                     }
                 });
             });
@@ -129,13 +131,13 @@
             else if (Notification.permission === "granted") {
                 var options = {
                     body: "Don't forget to complete your habits for today!",
-                    icon: "smoke.jpg",
+                    icon: "add.png",
                     dir : "ltr"
                 };
                 var notification = new Notification(habit.val().title, options);
-                notification.requireInteraction;
-
-                //notification.onclick = highlight(habit);
+                //notification.requireInteraction;
+                //notification.onclick = highlight(habit.key());
+                //notification.onclick = location.href = "list.html";
             }
             else if (Notification.permission !== 'denied') {
                 Notification.requestPermission(function (permission) {
@@ -146,11 +148,11 @@
                     if (permission === "granted") {
                         var options = {
                             body: "Don't forget to complete your habits for today!",
-                            icon: "smoke.jpg",
+                            icon: "add.png",
                             dir : "ltr"
                         };
                         var notification = new Notification(habit.val().title, options);
-                        notification.requireInteraction;
+                        //notification.requireInteraction;
                         //notification.onClick(highlight(habit));
                     }
                 });
@@ -158,14 +160,18 @@
         }
 
         function highlight(habit) {
-            var list = document.getElementsByTagName("ul");
-            for (var i = 0; i < list.length; i++) {
-                if(list[i].id == habit.key()){
-                    console.log(list[i]);
-                }
-            }
             //var orig = habit.style.backgroundColor;
             //habit.style.backgroundColor = "#FDFF47";
+            jQuery(window).load(function () {
+                
+                console.log(document);
+                console.log(habit);
+                console.log($("#habit-list li"));
+                console.log(document.body.querySelector("#habit-list>li"));
+            });
+            
+            //$("#"+habit).style.display = "none";
+
         }
     </script>
 </body>

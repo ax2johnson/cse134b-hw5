@@ -36,9 +36,10 @@
             	document.getElementById("icon3").style.border="5px solid #42A5F5";
 
             	var key = window.localStorage.getItem("habitKey");
+            	var userID = window.localStorage.getItem("userID");
 
             	var myFirebaseRef = new Firebase("https://torrid-fire-6209.firebaseio.com");
-    			var habitsRef = myFirebaseRef.child("habits");
+    			var habitsRef = myFirebaseRef.child("users").child(userID).child("habits");
 
     			var valueRef = habitsRef.child(key);
     			valueRef.once("value", function(snapshot) {

@@ -17,13 +17,13 @@ function addHabit(image, day_freq){
     if(other.value != ""){
         day_freq = other.value;
     }
-    console.log(day_freq);
     
+    var userID = window.localStorage.getItem("userID");
 
     var myFirebaseRef = new Firebase("https://torrid-fire-6209.firebaseio.com/");
 
-    var habitsRef = myFirebaseRef.child("habits");
-    var newHabitRef = habitsRef.push();
+    var random = makeid();
+    var habitsRef = myFirebaseRef.child("users").child(userID).child("habits").child(random);
 
 
     var onComplete = function(error) {
@@ -66,7 +66,7 @@ function addHabit(image, day_freq){
         document.getElementById('alert').innerHTML = '** Please provide a daily frequency **';
     }
     else{
-        newHabitRef.set({
+        habitsRef.set({
             title: title,
             //icon: img,
             weeklyfrequency: {
@@ -84,6 +84,15 @@ function addHabit(image, day_freq){
     }
 }
 
+function makeid(){
+    var text = "h";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for( var i=1; i < 25; i++ )
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
+}
 
 
 function getTitle(){
@@ -115,9 +124,11 @@ function getWeekFreq(){
 
 function listHabits(){
 
+    var userID = window.localStorage.getItem("userID");
+
     var myFirebaseRef = new Firebase("https://torrid-fire-6209.firebaseio.com");
 
-    var habitsRef = myFirebaseRef.child("habits");
+    var habitsRef = myFirebaseRef.child("users").child(userID).child("habits");
 
     // TODO: retrieve habits and list them
 
@@ -135,7 +146,7 @@ function listHabits(){
             var ratio = (progress / goal) * 200;
             newLi.innerHTML = "<ul class=\"habit-info\">" +
                 "<li><div class=\"habit-name\">"+childSnapshot.val().title+"</div></li>" +
-                "<li><img class=\"habit-icon\" src=\""+"smoke.jpg"/*childSnapshot.val().icon*/+"\" alt=\"habit icon\"></li> " +
+                "<li><img class=\"habit-icon\" src=\""+"add.png"/*childSnapshot.val().icon*/+"\" alt=\"habit icon\"></li> " +
                 "</ul> " +
                 "<div class=\"message\"> " +
                 "<span class=\"message-total\"> " +
@@ -175,8 +186,9 @@ function listHabits(){
 
 function updateProgress(element){
 var child = element.parentNode.parentNode;
+var userID = window.localStorage.getItem("userID");
 var myFirebaseRef = new Firebase("https://torrid-fire-6209.firebaseio.com");
-var habitsRef = myFirebaseRef.child("habits");
+var habitsRef = myFirebaseRef.child("users").child(userID).child("habits");
     habitsRef.once("value", function(snapshot) {
         snapshot.forEach(function(childSnapshot){
                     var msgElement = (element.parentNode.parentNode.getElementsByClassName("message-today"))[0];
@@ -234,10 +246,11 @@ var habitsRef = myFirebaseRef.child("habits");
 function removeHabit(key){
 
     console.log(key);
+    var userID = window.localStorage.getItem("userID");
 
     var myFirebaseRef = new Firebase("https://torrid-fire-6209.firebaseio.com");
 
-    var habitsRef = myFirebaseRef.child("habits");
+    var habitsRef = myFirebaseRef.child("users").child(userID).child("habits");
 
     // TODO: Insert unique ID of habit object here for deletion
     var deleteRef = habitsRef.child(key);
@@ -291,8 +304,9 @@ function updateHabit(image){
         pweekly[i] = document.getElementById("date" + i).checked;
     }
 
+    var userID = window.localStorage.getItem("userID");
     var myFirebaseRef = new Firebase("https://torrid-fire-6209.firebaseio.com");
-    var habitsRef = myFirebaseRef.child("habits");
+    var habitsRef = myFirebaseRef.child("users").child(userID).child("habits");
     var updateRef = habitsRef.child(pkey);
 
     var onComplete = function(error) {

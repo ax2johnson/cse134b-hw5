@@ -86,11 +86,16 @@ i  {
 	background-color: #BBDEFB;
 	
 }
+
 p#add{
 	text-align:center;
-	
 }
-.welcome .addbutton {
+
+p#list{
+  text-align:center;
+}
+
+.welcome .button {
  -webkit-appearance:none;
 	width: 49%;
 	display: inline-block;
@@ -111,7 +116,7 @@ p#add{
 }
 
 
-.welcome .addbutton:hover {
+.welcome .button:hover {
 	opacity: 0.75;
 	cursor: pointer;
 }

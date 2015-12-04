@@ -20,6 +20,10 @@
 			function sendRollbarError(message){
 				Rollbar.error(message);
 			}
+
+			window.onload = function(){
+				window.localStorage.clear();
+			}
 		</script>
 		<!-- end Rollbar -->
 		<!-- start Mixpanel -->

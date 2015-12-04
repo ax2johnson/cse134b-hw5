@@ -20,6 +20,14 @@
 			function sendRollbarError(message){
 				Rollbar.error(message);
 			}
+
+			function onStart() {
+            	var username = window.localStorage.getItem("theUser");
+				console.log(username);
+				var content = document.getElementById("insert-user").innerHTML = "welcome <b>"+username+"</b>, keep your habits in line";
+    		}
+
+			window.onload = onStart;
 		</script>
 		<!-- end Rollbar -->
 		<!-- start Mixpanel -->
@@ -32,13 +40,13 @@
 	<body>
 	  <div class="welcome">
 	  	<h1>virtue / <i>vice</i></h1>
-          
-        <h2><span>keep your habits in line</span></h2>    
+        <h2><span id="insert-user">keep your habits in line</span></h2>    
      
-	    <p id="add"><input class="addbutton" type="button" value="add a habit" onclick="location.href='add.html'">
-		</p>
+	    <p id="add"><input class="add button" type="button" value="add a habit" onclick="location.href='add.html'"></p>
+	    <p id="list"><input class="list button" type="button" value="go to list" onclick="location.href='list.html'"></p>
 	  </div>
 	</body>
 	<script src="CRUD.js"></script>
 	<script src="firebase.js"></script>
+	<script scr="login.js"></script>
 </html>
