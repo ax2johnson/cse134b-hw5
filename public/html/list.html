@@ -55,7 +55,7 @@
             var today = date[0]+", "+date[1]+" "+date[2]+", "+date[3];
             document.getElementById("display-date").innerHTML=today;
 
-            var socket = io.connect('localhost:3000');
+            var socket = io.connect('108.253.177.158');
             socket.on('reminder', function (data) {
                 console.log("Received reminder from server");
                 reminder(date[0]);

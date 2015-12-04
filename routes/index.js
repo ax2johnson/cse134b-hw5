@@ -7,7 +7,7 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   	//res.render('index', { title: 'Habits' });
   	//res.sendFile(__dirname + '/../public/html/welcome.html');
-  	var filename = "/../public/html/welcome.html";
+  	var filename = "/../public/html/login.html";
 	var ext = path.extname(filename);
 	var localPath = __dirname;
 	var validExtensions = {
