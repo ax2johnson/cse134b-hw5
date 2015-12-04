@@ -86,6 +86,17 @@ to the user's screen. We attempted to use the Roost free trial server to send th
 server, we were unable to send the request in the required format. It should also be noted that Roost is not completely compatible
 with Chrome or FireFox and there aren't many other services that would allow for web notifications when the browser is not open.
 
+c) we completely refactored our original notification solution because Roost did not provide a complete SDK for our needs and 
+was only available as a free trial version that broadcasted notifications to everyone. we instead constructed a node.js server and
+ran it locally during development. we eventually ported the server to a raspberry pie which would be constantly running over one 
+of our home networks. this allowed us to host the project publically on the internet, granting our server the ability to send 
+http responses to client requests. to implement a notification system, we used the socket.io technology to monitor if a user had
+sent an initial request to our server. if so, the server would emit a signal through a socket that prompted the client to send a
+notification to the user to remind them to complete their active habits for today. the active habits were characterized as habits
+specificied for that day of the week in addition to not yet meeting the daily goal. the actual notifications that are sent are from
+the Notifications API compatible with Firefox, Chrome, Safari, and Opera but not Internet Explorer. the user would have to grant
+access to these notifications via a pop up that our application initally prompts. once 
+
 
 Working Functionalities:
 	* Able to validate a log-in or prompt user to sign-up if email does not exist on data base
@@ -127,7 +138,7 @@ Austin Li:
 Anthony Johnson:
 	1) Edit habit function
 	2) Date display intended for notifications and list display
-	3) Beginning notification logic (Roost)
+	3) Beginning notification logic (Roost
 
 Elioth Almada (Left during HW5) : 
 	1) User able to add a method and store in databse 
